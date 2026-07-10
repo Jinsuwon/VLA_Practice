@@ -1,0 +1,39 @@
+# VLA Reasoning / Hierarchical Decomposition Comparison
+
+## Study Question
+
+**Does explicit reasoning or hierarchical decomposition help with long-horizon or ambiguous instructions?**
+
+## Compared Models
+
+- OpenVLA
+- Hi-Robot
+- CoT-VLA
+
+---
+
+## Comparison Table
+
+| Model | A. Reasoning or Hierarchical Decomposition | B. Long-horizon or Ambiguous Instructions |
+|---|---|---|
+| **OpenVLA** | **Explicit reasoning 없음.** 현재 image observation과 language instruction을 입력받아 바로 action token을 예측함.<br><br>**Hierarchical decomposition 없음.** DINOv2 + SigLIP → MLP projector → Llama 2 7B → action de-tokenizer 구조는 task decomposition이 아니라 end-to-end action prediction pipeline임. | **Long-horizon / ambiguous instruction을 직접 다루는 구조는 아님.** 현재 이미지와 명령을 바탕으로 다음 action을 예측하는 방식이므로, subtask planning, clarification, replanning 구조는 없음. |
+| **Hi-Robot** | **Reasoning 있음.** High-level VLM이 current observation과 user prompt/feedback을 해석해 robot verbal response와 low-level language command를 생성함.<br><br>**Hierarchical decomposition이 가장 뚜렷함.** High-level policy → low-level policy 구조로 나뉘며, high-level policy가 atomic command를 low-level policy에 전달함. | **Long-horizon task에 가장 직접적으로 대응.** Table bussing, sandwich making, grocery shopping처럼 여러 단계의 조작이 필요한 task에서 평가됨.<br><br>다만 ambiguous instruction이 생겼을 때 로봇이 먼저 사용자에게 확인 질문을 던지는 active clarification 구조라고 보기는 어려움. 대신 user feedback/interjection을 받아 task ambiguity를 줄이고 command를 수정하는 구조에 가까움. |
+| **CoT-VLA** | **Visual reasoning 있음.** Observation + instruction을 보고 future subgoal image를 먼저 생성하고, 이를 바탕으로 action chunk를 생성함.<br><br>**Hierarchical decomposition은 없음.** Hi-Robot처럼 high-level policy와 low-level policy가 분리된 구조는 아니며, 하나의 VLA 안에서 subgoal image를 중간 reasoning step으로 사용하는 방식임. | **Long-horizon / ambiguous instruction을 직접 다루는 구조는 아님.** Subgoal image는 short-horizon visual goal에 가까우며, task를 여러 subtask로 나누거나 사용자에게 확인 질문을 하는 구조는 없음. Ambiguous instruction 처리나 interactive feedback 반영은 Hi-Robot보다 약함. |
+
+---
+
+## Short Summary
+
+| Model | Key Position |
+|---|---|
+| **OpenVLA** | Reasoning/decomposition이 없는 end-to-end VLA baseline |
+| **Hi-Robot** | Hierarchical decomposition을 통해 long-horizon interaction에 가장 직접적으로 대응 |
+| **CoT-VLA** | Hierarchical policy 구조는 없지만, subgoal image를 활용한 visual reasoning step을 추가 |
+
+---
+
+## Takeaway
+
+OpenVLA는 image와 instruction을 바로 action token으로 매핑하는 baseline에 가깝다.  
+Hi-Robot은 high-level policy와 low-level policy를 분리하여 long-horizon task 수행에 필요한 command-level decomposition을 명시적으로 수행한다.  
+CoT-VLA는 policy-level hierarchy는 없지만, action을 바로 예측하지 않고 future subgoal image를 먼저 생성함으로써 visual reasoning을 중간 단계로 사용한다.
