@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Datasets
+datasets/
+data/
+repos/LIBERO/libero/datasets/
+repos/LIBERO/datasets/
+
+# Checkpoints
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Outputs
+outputs/*
+!outputs/.gitkeep
+
+# Logs
+logs/
+wandb/
+runs/
+
+# System files
+.DS_Store
+Thumbs.db
