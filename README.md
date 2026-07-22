@@ -29,17 +29,17 @@
 <details>
 <summary><b>Demonstration Dataset 확인</b></summary>
 
- [v] LIBERO demonstration HDF5 파일 확인
- [v] demonstration 개수 확인
- [v] trajectory 길이 확인
- [v] RGB image shape 확인
- [v] joint state shape 확인
- [v] gripper state shape 확인
- [v] 7차원 action shape 확인
- [v] timestep 단위 데이터 구조 확인
- [v] PyTorch Dataset 작성
- [v] DataLoader 작성
- [v] 실제 batch shape 확인
+[v] LIBERO demonstration HDF5 파일 확인
+[v] demonstration 개수 확인
+[v] trajectory 길이 확인
+[v] RGB image shape 확인
+[v] joint state shape 확인
+[v] gripper state shape 확인
+[v] 7차원 action shape 확인
+[v] timestep 단위 데이터 구조 확인
+[v] PyTorch Dataset 작성
+[v] DataLoader 작성
+[v] 실제 batch shape 확인
 
 </details>
 
